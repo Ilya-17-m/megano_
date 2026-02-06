@@ -1,0 +1,14 @@
+
+services:
+  megano:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command:
+      - "gunicorn"
+      - "megano.wsgi:application"
+      - "--bind"
+      - "0.0.0.0:8001"
+    ports:
+      - "8000:8001"
+    restart: always

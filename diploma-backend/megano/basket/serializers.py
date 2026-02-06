@@ -1,0 +1,19 @@
+from .models import Basket
+from rest_framework import serializers
+
+from catalog.serializers import ProductShortSerializer
+
+
+class BasketSerializer(serializers.ModelSerializer):
+    product = ProductShortSerializer(read_only=True)
+
+    class Meta:
+        model = Basket
+        fields = [
+            'id','product'
+        ]
+
+    def to_representation(self, instance):
+        return ProductShortSerializer(instance.product).data
+
+
